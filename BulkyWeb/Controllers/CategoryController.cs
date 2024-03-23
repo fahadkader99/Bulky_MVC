@@ -21,5 +21,15 @@ namespace BulkyWeb.Controllers
             // whatever we pass in the controller return() > it will be displayed in UI
             return View(objCategoryList);   // passing the list obj to the view. Now capture list of models in the View > Index.html to display                       
         }
+
+        public IActionResult Create()
+        {
+            // action method to invoke the new view - for Add new Category page
+            return View();
+        }
+
+
+
+
     }
 }
