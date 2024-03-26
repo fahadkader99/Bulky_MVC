@@ -28,6 +28,31 @@ namespace BulkyWeb.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Create(Category obj)
+            {
+            if (obj.Name == obj.DisplayOrder.ToString())                                                    // server side validation
+            {
+                ModelState.AddModelError("name", "Display Order can't exactly match the Name.");
+            }
+            if (obj.Name != null && obj.Name.ToLower() == "test")                                           // server side validation
+            {
+                ModelState.AddModelError("name", "Test is an invalid value");
+            }
+
+            // action method to invoke HTTPPost - for Add new Category page. Obj object will have to value to create category
+            if (ModelState.IsValid)                                 // It will go to Category & check all the data annotaion validation 
+            {
+                _db.Categories.Add(obj);                            // Adding category obj on category table (keeping track of what has to add)
+                _db.SaveChanges();                                  // to keep track of every changes & dding the category
+                return RedirectToAction("Index", "Category");
+            }
+
+            return View();
+
+            
+        }
+
 
 
 
